@@ -91,3 +91,9 @@ PRODUCT_SOONG_NAMESPACES += \
 # WiFi
 PRODUCT_PACKAGES += \
     TargetWifiOverlay
+
+# der-exp: движок маршрутизации steer и его обвязка (vendor/der, кладёт локальный манифест
+# der-exp). Без этой строки в образ не попадают ни steer, ни nft, ни сервисы init, ни политика
+# SELinux домена steerd. inherit-product, а не -if-exists: дерево без vendor/der — ошибка
+# манифеста, и сборка обязана упасть громко, а не собрать прошивку без движка.
+$(call inherit-product, vendor/der/config/der.mk)
