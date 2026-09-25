@@ -15,9 +15,9 @@ $(call inherit-product, vendor/xiaomi/beryllium/beryllium-vendor.mk)
 TARGET_SCREEN_HEIGHT := 2246
 TARGET_SCREEN_WIDTH := 1080
 
-# Space: see RemovePackages in Android.mk
+# Space: see remove_packages/Android.bp
 PRODUCT_PACKAGES += \
-    RemovePackages
+    BerylliumRemovePackages
 
 # FM
 PRODUCT_PACKAGES += \
