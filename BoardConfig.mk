@@ -28,6 +28,12 @@ DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/manifest.xml
 # Partitions
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67092480
 
+# Partitions: share duplicate ext4 blocks. The retrofit super on beryllium
+# (system 3 GiB + vendor 1 GiB + cust 832 MiB) is fixed in size, and a
+# DerpFest build with the full GMS set overflowed it by ~371 MiB; system,
+# system_ext and product are read-only, so deduplicated images are safe.
+BOARD_EXT4_SHARE_DUP_BLOCKS := true
+
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
