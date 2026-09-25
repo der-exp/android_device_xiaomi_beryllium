@@ -34,6 +34,13 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67092480
 # system_ext and product are read-only, so deduplicated images are safe.
 BOARD_EXT4_SHARE_DUP_BLOCKS := true
 
+# Blobs come from the lineage-22.2 TheMuppets branch and some of them link
+# against symbols whose signature changed in Android 16 (libwfdservice.so and
+# AudioSystem::setDeviceConnectionState). Those symbols are provided at load
+# time by shims that the executables pull in (hardware/lineage/compat), which
+# the build-time ELF check cannot see.
+BUILD_BROKEN_PREBUILT_ELF_FILES := true
+
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
